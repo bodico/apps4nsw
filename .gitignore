@@ -13,6 +13,6 @@ src
 *.swp
 .tmp_*
 dev-log/*
-.idea/workspace.xml
-.idea/dictionaries/*
+.idea/*
+*/.idea/*
 *.tmproj
