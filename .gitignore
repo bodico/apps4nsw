@@ -2,3 +2,17 @@
 bin
 include
 lib
+*.pyc
+*~
+dev.db
+.svn
+public/media/uploads/*
+public/media/thumbs/*
+log
+src
+*.swp
+.tmp_*
+dev-log/*
+.idea/workspace.xml
+.idea/dictionaries/*
+*.tmproj
