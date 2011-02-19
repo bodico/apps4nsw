@@ -14,6 +14,15 @@ Installation
   pip install -r requirements.txt
 
 
+Start dev server
+----------------
+
+To run a development server on your local instance::
+
+  cd project/
+  ./manage.py runserver
+
+You should then see the site running at http://127.0.0.1:8000
 
 
 
