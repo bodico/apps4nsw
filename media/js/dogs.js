@@ -10,6 +10,9 @@ var notSet = true;
 
 //WEB_SOCKET_SWF_LOCATION = '/static/lib/vendor/web-socket-js/WebSocketMain.swf';
 
+var small = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png'
+var large = 'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png'
+
 
 $(document).ready(function(){
 
@@ -22,7 +25,7 @@ $(document).ready(function(){
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-   // map.enableRotation();
+    //map.enableRotation();
 
 
     $('#goto').click(function(event){
@@ -37,27 +40,67 @@ $(document).ready(function(){
     getLocation();
     map.setCenter(initialLocation);
 
+    $('#dog_filter').change(function(event) {
+        var str = "";
+          $("select option:selected").each(function () {
+                str += $(this).text() + " ";
+              });
+        
+        $.getJSON('getdogs?cat='+str,
+                function(data) {
+                    for (i = 0; i < data.length; i++) {
+                        var lat = data[i][0];
+                        var lon = data[i][1];
+                        var postcode = data[i][2];
+                        var breed = data[i][3];
+                        var img_url = data[i][4];
+                        var count = parseInt(data[i][5]);
+                        var pos = new google.maps.LatLng(lat,lon);
+                        new google.maps.Circle({center: pos,
+                                clickable: false,
+                                fillOpacity: 0.3,
+                                map: map,
+                                radius: 200+count*5});
+                    };
+
+                })
+    });
+
 
     $.getJSON('getdogs',
     function(data) {
         for (i = 0; i < data.length; i++) {
         	var lat = data[i][0];
         	var lon = data[i][1];
-            var breed = data[i][2];
-            var img_url = data[i][3];
-            var count = parseInt(results[i][4]);
+            var postcode = data[i][2];
+            var breed = data[i][3];
+            var img_url = data[i][4];
+            var count = parseInt(data[i][5]);
+            var pos = new google.maps.LatLng(lat,lon);
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat,lon),
+                position: pos,
                 map: map,
                 icon: img_url,
                 title: breed,
             });
-            markers[i] = marker;
+            markers[postcode] = marker;
+            addpopup(marker, breed);
+
         }
     });
 
+    function addpopup(marker, breed) {
+        var infowindow = new google.maps.InfoWindow({
+             content: breed
+        });
+        google.maps.event.addListener(marker, 'click', function(event) {
+            infowindow.open(map,marker);
+        });
+
+    }
 
 
+/*
       google.maps.event.addListener(map, 'idle', function() {
     	  reset = true;
     	  var bounds = map.getBounds();
@@ -68,11 +111,11 @@ $(document).ready(function(){
     		  console.log("sent: "+msg);
     	  }
       });
-
       google.maps.event.addListener(map, 'click', function(event) {
         alert(event);
       });
 
+*/
 
 
 
@@ -155,8 +198,6 @@ function handleNoGeolocation(errorFlag) {
 }
 
 
-var small = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png'
-var large = 'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png'
 
 
 function clearPins() {
