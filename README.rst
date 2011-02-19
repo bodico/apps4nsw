@@ -70,6 +70,7 @@ Create the db::
 
   cd project/
   ./manage.py syncdb
+  ./manage.py migrate
 
 Import some data::
 
