@@ -21,7 +21,7 @@ $(document).ready(function(){
     //----------------------------------
 
     var myOptions = {
-        zoom: 15,
+        zoom: 13,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
@@ -65,7 +65,7 @@ $(document).ready(function(){
                     position: pos,
                     map: map,
                     icon: img_url,
-                    title: breed,
+                    title: postcode +' ('+breed+'='+count+')',
                 });
                 markers[postcode] = marker;
                 addpopup(marker, breed, postcode);
