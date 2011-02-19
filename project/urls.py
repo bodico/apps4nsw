@@ -14,12 +14,5 @@ urlpatterns = patterns('',
 
 if settings.SERVE_MEDIA:
     urlpatterns += patterns('',
-        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     )
-try:
-    urlpatterns += patterns('',
-        (r'^log/emails/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': settings.EMAIL_FILE_PATH, 'show_indexes': True}),
-    )
-except AttributeError:
-    pass
