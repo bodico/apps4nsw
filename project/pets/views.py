@@ -6,20 +6,27 @@ from googlemaps import GoogleMaps
 from models import Postcode
 
 
-def __get_suburbs():
-    suburbs = []
-    postcodes = Postcode.objects.filter(state='NSW')
+def __get_animals(category_id=None):
+    items = []
 
-    for postcode in postcodes:
-        suburbs.append([
+    if category_id:
+        animals = Animal.objects.filter(category_id=category_id)
+    else:
+        animals = Animal.objects.all()
+
+    for animal in animals:
+        postcodes = Postcode.objects.filter(postcode=animal.postcode)
+        postcode = postcode[0]
+        items.append([
             postcode.lat,
             postcode.lon,
             postcode.postcode,
-            'SOME_KIND_OF_DOG',
-            'http://www.americanrottweiler.org/wp-content/uploads/2009/05/american-rottweiler-puppy.jpg',
-            '20'
+            animal.category_name,
+            '/media/img/dogs/' + str(animal.category_id) + '.png',
+            animal.counter
         ])
-    return suburbs
+
+    return items
     
 
 
@@ -30,14 +37,11 @@ def index(request, **kwargs):
     return render_to_response('pets/map.html', context)
 
 def getdogs(request, **kwargs):
-    #    context = RequestContext(request)
 
-    #    context['suburbs'] = __fake_suburbs()
-
-    #    items = [
-    #        [33.23, 44.45, 'dog', 'http://en.wikipedia.org/wiki/File:YellowLabradorLooking_new.jpg', 3]
-    #    ]
-    items = __get_suburbs()
+    if request.category_id:
+        items = __get_animals(category_id)
+    else:
+        items = __get_animals()
     
 
     json = simplejson.dumps(items)
