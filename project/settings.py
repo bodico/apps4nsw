@@ -3,6 +3,7 @@ import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+SERVE_MEDIA = DEBUG
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 
 
