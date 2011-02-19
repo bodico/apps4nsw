@@ -48,3 +48,16 @@ Add /YOURWORKSPACE/apps4nsw/apps4nsw/templates as a templates directory.
 
 then click 'Apply'
 
+
+Import data
+-----------
+
+get source data file (NSW Companion Animals Register.csv) and save it in::
+
+  ~/animals.csv
+
+Then::
+
+  cd /YOURWORKSPACE/apps4nsw/apps4nsw
+  mysql -u MYSQL_USERNAME -p < data-import-script.sql
+
