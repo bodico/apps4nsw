@@ -37,9 +37,6 @@ def getdogs(request, **kwargs):
     #        [33.23, 44.45, 'dog', 'http://en.wikipedia.org/wiki/File:YellowLabradorLooking_new.jpg', 3]
     #    ]
     items = __fake_suburbs()
-
-    import pdb
-    pdb.set_trace()
     
 
     json = simplejson.dumps(items)
