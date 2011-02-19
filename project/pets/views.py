@@ -46,6 +46,14 @@ DATA = """
 2018	360	1	Toy
 2019	413	2	Working
 2020	362	4	Terrier
+2021	570	1	Toy
+2022	371	1	Toy
+2023	404	1	Toy
+2024	415	2	Working
+2025	339	1	Toy
+2026	777	1	Toy
+2027	232	1	Toy
+2028	216	1	Toy
 """
 
 
@@ -62,7 +70,7 @@ def __dummy_animals(category_id=None):
             loc.lon,
             loc.postcode,
             cat,
-            '/media/img/dogs/' + str(catid) + '.png',
+            '/static_media/img/' + str(catid) + '.png',
             count
         ])
 
