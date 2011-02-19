@@ -38,10 +38,22 @@ $(document).ready(function(){
     map.setCenter(initialLocation);
 
 
-    $.getJSON(
-    'http://soundcloud.com/oembed?url=http%3A//soundcloud.com/forss/flickermood&format=js&callback=?',
+    $.getJSON('dogdata',
     function(data) {
-        showPin(data);
+        for (i = 0; i < data.length; i++) {
+        	var lat = data[i][0];
+        	var lon = data[i][1];
+            var breed = data[i][2];
+            var img_url = data[i][3];
+            var count = parseInt(results[i][4]);
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat,lon),
+                map: map,
+                icon: img_url,
+                title: breed,
+            });
+            markers[i] = marker;
+        }
     });
 
 
@@ -146,49 +158,6 @@ function handleNoGeolocation(errorFlag) {
 var small = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png'
 var large = 'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png'
 
-function showPin(results) {
-
-
-        for (i = 0; i < results.length; i++) {
-        	var lat = results[i][0]
-        	var lon = results[i][1]
-            var uid = results[i][2];
-            var count = parseInt(results[i][3]);
-            marker = markers[uid]
-            if (lat == null || lon == null) {
-            	if (marker != null) {
-            		marker.setMap(null);
-                    delete markers[uid];
-            	}
-            } else {
-            	if (marker == null) {
-	                var marker = new google.maps.Marker({
-	                    position: new google.maps.LatLng(lat,lon),
-	                    map: map,
-	                    icon: small,
-	                    title:uid
-	                });
-	                markers[uid] = marker;
-	            } else {
-	                marker.setPosition(new google.maps.LatLng(lat,lon));
-	            }
-	            if (count > 30) {
-		            marker.setIcon("http://gmaps-utility-library.googlecode.com/svn/trunk/markerclusterer/images/m4.png");
-	            } else if (count > 6) {
-		            marker.setIcon("http://gmaps-utility-library.googlecode.com/svn/trunk/markerclusterer/images/m3.png");
-	            } else if (count > 3) {
-		            marker.setIcon("http://gmaps-utility-library.googlecode.com/svn/trunk/markerclusterer/images/m2.png");
-	            } else if (count > 1) {
-		            marker.setIcon("http://gmaps-utility-library.googlecode.com/svn/trunk/markerclusterer/images/m1.png");
-	            } else {
-	                marker.setIcon(small);
-	            }
-	            marker.setTitle(uid +" "+ count)
-            }
-
-        }
-
-}
 
 function clearPins() {
 	// Deletes all markers in the array by removing references to them
