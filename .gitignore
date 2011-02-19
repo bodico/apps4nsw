@@ -6,6 +6,7 @@ build
 *.pyc
 *~
 dev.db
+*.db
 .svn
 public/media/uploads/*
 public/media/thumbs/*
