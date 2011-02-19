@@ -10,6 +10,7 @@ def __fake_suburbs():
     gmaps = GoogleMaps()
     for postcode in range(2000,2010):
         lat, lng = gmaps.address_to_latlng(str(postcode) + ", NSW, Australia")
+        lat, lng = gmaps.
         suburbs.append([
             lat,
             lng,
