@@ -25,4 +25,26 @@ To run a development server on your local instance::
 You should then see the site running at http://127.0.0.1:8000
 
 
+pyCharm config
+--------------
+
+If you're using pyCharm (or some other fancy IDE) then you need to 
+configure it to refer to the python binary in your virtualenv.
+
+i.e. Preferences > Python Interpreter
+
+* remove any interpreter pyCharm found by itself
+* add /YOURWORKSPACE/apps4nsw/bin/python
+
+then click 'Apply'
+
+Go to 'Django Support' and 'Enable Django Support'.
+
+* set Django project root as /YOURWORKSPACE/apps4nsw/apps4nsw/project
+
+pyCharm should now find settings.py and manage.py.
+
+Add /YOURWORKSPACE/apps4nsw/apps4nsw/templates as a templates directory.
+
+then click 'Apply'
 
