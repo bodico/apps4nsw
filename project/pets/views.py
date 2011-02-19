@@ -26,7 +26,8 @@ def __get_animals(category_id=None):
 
 
     return items
-    
+
+
 
 
 def index(request, **kwargs):
