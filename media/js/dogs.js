@@ -68,7 +68,7 @@ $(document).ready(function(){
                     title: breed,
                 });
                 markers[postcode] = marker;
-                //addpopup(marker, breed);
+                addpopup(marker, breed, postcode);
             } else {
                 marker = new google.maps.Circle({center: pos,
                         clickable: false,
@@ -87,12 +87,15 @@ $(document).ready(function(){
         displayData("0", data);
     });
 
-    function addpopup(marker, breed) {
+    function addpopup(marker, breed, postcode) {
         var infowindow = new google.maps.InfoWindow({
-             content: breed
+             content: "Fetching data"
         });
         google.maps.event.addListener(marker, 'click', function(event) {
-            infowindow.open(map,marker);
+            $.getJSON('gettopbreeds/'+postcode, function (data) {
+                infowindow.content = data;
+                infowindow.open(map,marker);
+            })
         });
 
     }
