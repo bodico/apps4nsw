@@ -18,7 +18,7 @@ $(document).ready(function(){
     //----------------------------------
 
     var myOptions = {
-        zoom: 17,
+        zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
@@ -31,7 +31,6 @@ $(document).ready(function(){
         return false;
     });
 
-    var tag = document.getElementById('tag').value;
     var reset = true;
 
 
