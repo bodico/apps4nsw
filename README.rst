@@ -62,3 +62,17 @@ Then::
   cd /YOURWORKSPACE/apps4nsw/apps4nsw
   mysql -u MYSQL_USERNAME -p < data-import-script.sql
 
+
+Create site database
+--------------------
+
+Create the db::
+
+  mysql -u root -p
+  CREATE DATABASE apps4nsw
+
+Then::
+
+  cd project/
+  ./manage.py syncdb
+
