@@ -59,11 +59,20 @@ Create the db::
   ./manage.py syncdb
   ./manage.py migrate
 
-Import some data::
+
+Load in data
+------------
+
+If you want to get off the ground quickly, simply load the pets data
+fixtures::
+
+  ./manage.py loaddata pets/fixtures/pets.json
+
+Or if you need to recreate the data from scratch, run these scripts in
+sequence::
 
   ./manage.py geocode_postcodes
   ./manage.py load_dogs_by_suburb
   ./manage.py flatten_postcodes
   ./manage.py aggregate_totals
-
 

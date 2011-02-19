@@ -2,38 +2,10 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils import simplejson
-from googlemaps import GoogleMaps
-from models import Postcode, Animal, CategoryPostcodeTotal
+from models import CategoryPostcodeTotal
 
 
-def __get_totals(category_id=None):
-    items = []
-
-    if category_id:
-        totals = CategoryPostcodeTotal.objects.filter(
-            category_id=category_id,
-            postcode__gte ='2000',
-            postcode__lte='2999'
-        ).order_by('postcode', 'total')
-    else:
-        totals = CategoryPostcodeTotal.objects.filter(
-            postcode__gte ='2000',
-            postcode__lte='2999'
-        ).order_by('postcode', 'total')
-
-    for total in totals:
-        items.append([
-           total.lat,
-           total.lon,
-           total.postcode,
-           total.category_name,
-           '/static_media/img/' + str(total.category_id) + '.png',
-           total.total
-        ])
-
-    return items
-
-
+# some example data for testing only
 DATA = """
 2000	548	1	Toy
 2001	4	2	Working
@@ -61,8 +33,10 @@ DATA = """
 2028	216	1	Toy
 """
 
-
 def __dummy_animals(category_id=None):
+    """
+    test utility function...
+    """
     items = []
 
     for line in DATA.strip().split('\n'):
@@ -82,6 +56,36 @@ def __dummy_animals(category_id=None):
     return items
 
 
+def __get_totals(category_id=None):
+    """
+    utility function for transforming data into
+    json-digestible form
+    """
+    items = []
+
+    if category_id:
+        totals = CategoryPostcodeTotal.objects.filter(
+            category_id=category_id,
+            postcode__gte ='2000',
+            postcode__lte='2999'
+        ).order_by('postcode', 'total')
+    else:
+        totals = CategoryPostcodeTotal.objects.filter(
+            postcode__gte ='2000',
+            postcode__lte='2999'
+        ).order_by('postcode', 'total')
+
+    for total in totals:
+        items.append([
+           total.lat,
+           total.lon,
+           total.postcode,
+           total.category_name,
+           '/static_media/img/' + str(total.category_id) + '.png',
+           total.total
+        ])
+
+    return items
 
 
 def index(request, **kwargs):
