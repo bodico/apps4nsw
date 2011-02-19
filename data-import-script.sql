@@ -13,7 +13,7 @@ CREATE TABLE `animals` (
   `flavour` varchar(100) NOT NULL,
   `other` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2094867 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2094867 ;
 
 load data local infile '~/animals.csv' into table animals
 fields terminated by '	'
