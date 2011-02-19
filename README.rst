@@ -10,6 +10,7 @@ Installation
   virtualenv apps4nsw
   cd apps4nsw
   git clone git@github.com:bodico/apps4nsw.git
+  source bin/activate
   cd apps4nsw
   pip install -r requirements.txt
 
