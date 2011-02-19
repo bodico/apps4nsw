@@ -40,9 +40,13 @@ $(document).ready(function(){
     getLocation();
     map.setCenter(initialLocation);
 
-    $('#filter').select(function(event) {
-        var cat = $.value;
-        $.getJSON('getcats?cat='+cat,
+    $('#dog_filter').change(function(event) {
+        var str = "";
+          $("select option:selected").each(function () {
+                str += $(this).text() + " ";
+              });
+        
+        $.getJSON('getdogs?cat='+str,
                 function(data) {
                     for (i = 0; i < data.length; i++) {
                         var lat = data[i][0];

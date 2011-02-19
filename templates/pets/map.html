@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -13,18 +13,32 @@
 <script type="text/javascript" src="http://code.google.com/apis/gears/gears_init.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}js/dogs.js"></script>
+<link href="{{ MEDIA_URL }}css/site.css" rel="stylesheet" type="text/css" />
 </head>
-<body >
-
-<div>
-    Most popular dogs in suburbs
+<body>
+<div id="container">
+<div id="header">
+	<img src="{{ MEDIA_URL }}/img/poodle-icon.png" alt="poodle" />
+	<h1>Is Bondi full of Poodles?</h1>
 </div>
+	<div class="filter">
+		<h2>Pick a type of dog</h2>
+		<select id="dog_filter">
+			<option value="0">All</option>
+			<option value="1">Toy</option>
+			<option value="2">Working</option>
+			<option value="3">Hounds</option>
+			<option value="4">Terrier</option>
+			<option value="5">Sporting</option>
+			<option value="6">Non-sporting</option>
+			<option value="7">Mystery</option>
+		</select>
+	</div>
 
-<div id="map_canvas"></div>
+<div id="map_canvas">
 
-
-
-
+</div>
+</div>
 
 </body>
 </html>
