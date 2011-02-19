@@ -10,7 +10,7 @@ def __get_animals(category_id=None):
     items = []
 
     if category_id:
-        animals = Animal.objects.filter(category_id=category_id)
+        animals = Animal.objects.filter(category_id=category_id, postcode_gte__='2000', postcode_lte__='2010')
     else:
         animals = Animal.objects.all()
 
@@ -39,7 +39,8 @@ def index(request, **kwargs):
 
 def getdogs(request, **kwargs):
 
-    items = __get_animals()
+    #items = __get_animals()
+    items = __get_animals(3)
     json = simplejson.dumps(items)
 
     return HttpResponse(json)
