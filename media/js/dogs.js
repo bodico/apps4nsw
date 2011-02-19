@@ -38,7 +38,7 @@ $(document).ready(function(){
     map.setCenter(initialLocation);
 
 
-    $.getJSON('dogdata',
+    $.getJSON('getdogs',
     function(data) {
         for (i = 0; i < data.length; i++) {
         	var lat = data[i][0];
