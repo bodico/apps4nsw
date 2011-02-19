@@ -3,20 +3,21 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils import simplejson
 from googlemaps import GoogleMaps
+from models import Postcode
 
 
-def __fake_suburbs():
+def __get_suburbs():
     suburbs = []
-    gmaps = GoogleMaps()
-    for postcode in range(2000,2010):
-        lat, lng = gmaps.address_to_latlng(str(postcode) + ", NSW, Australia")
-        lat, lng = gmaps.
+    postcodes = Postcode.objects.filter(state='NSW')
+
+    for postcode in postcodes:
+        if suburbs
         suburbs.append([
-            lat,
-            lng,
-            postcode,
+            postcode.lat,
+            postcode.lon,
+            postcode.postcode,
             'SOME_KIND_OF_DOG',
-            'http://en.wikipedia.org/wiki/File:YellowLabradorLooking_new.jpg',
+            'http://www.americanrottweiler.org/wp-content/uploads/2009/05/american-rottweiler-puppy.jpg',
             '20'
         ])
     return suburbs
@@ -37,7 +38,7 @@ def getdogs(request, **kwargs):
     #    items = [
     #        [33.23, 44.45, 'dog', 'http://en.wikipedia.org/wiki/File:YellowLabradorLooking_new.jpg', 3]
     #    ]
-    items = __fake_suburbs()
+    items = __get_suburbs()
     
 
     json = simplejson.dumps(items)
