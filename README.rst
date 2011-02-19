@@ -76,4 +76,5 @@ Import some data::
 
   ./manage.py geocode_postcodes
   ./manage.py load_dogs_by_suburb
+  ./manage.py flatten_postcodes
 

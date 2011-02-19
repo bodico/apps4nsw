@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils import simplejson
 from googlemaps import GoogleMaps
-from models import Postcode
+from models import Postcode, Animal
 
 
 def __get_animals(category_id=None):
@@ -15,16 +15,15 @@ def __get_animals(category_id=None):
         animals = Animal.objects.all()
 
     for animal in animals:
-        postcodes = Postcode.objects.filter(postcode=animal.postcode)
-        postcode = postcode[0]
         items.append([
-            postcode.lat,
-            postcode.lon,
-            postcode.postcode,
-            animal.category_name,
-            '/media/img/dogs/' + str(animal.category_id) + '.png',
-            animal.counter
+           animal.lat,
+           animal.lon,
+           animal.postcode,
+           animal.category_name,
+           '/media/img/dogs/' + str(animal.category_id) + '.png',
+           animal.counter
         ])
+
 
     return items
     
@@ -36,14 +35,18 @@ def index(request, **kwargs):
 
     return render_to_response('pets/map.html', context)
 
+
 def getdogs(request, **kwargs):
 
-    if request.category_id:
-        items = __get_animals(category_id)
-    else:
-        items = __get_animals()
-    
+    items = __get_animals()
+    json = simplejson.dumps(items)
 
+    return HttpResponse(json)
+
+
+def getdogs_category(request, category_id, **kwargs):
+
+    items = __get_animals(category_id)
     json = simplejson.dumps(items)
 
     return HttpResponse(json)
