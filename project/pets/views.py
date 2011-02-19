@@ -15,7 +15,7 @@ def __fake_suburbs():
             lng,
             postcode,
             'SOME_KIND_OF_DOG',
-            'http://en.wikipedia.org/wiki/File:YellowLabradorLooking_new.jpg',
+            'http://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Canis_Africanis.jpg/100px-Canis_Africanis.jpg',
             '20'
         ])
     return suburbs
