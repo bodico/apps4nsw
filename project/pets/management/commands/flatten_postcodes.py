@@ -1,7 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
 from project.pets.models import Animal, Postcode
-import csv
-import os
 
 class Command(BaseCommand):
 

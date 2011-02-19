@@ -3,29 +3,32 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils import simplejson
 from googlemaps import GoogleMaps
-from models import Postcode, Animal
+from models import Postcode, Animal, CategoryPostcodeTotal
 
 
-def __get_animals(category_id=None):
+def __get_totals(category_id=None):
     items = []
 
     if category_id:
-        animals = Animal.objects.filter(category_id=category_id, postcode__gte ='2000', postcode__lte='2999')
-        animals.query.group_by = ['postcode']
-        # animals = Animal.objects.filter(category_id=category_id, postcode='2000')
+        totals = CategoryPostcodeTotal.objects.filter(
+            category_id=category_id,
+            postcode__gte ='2000',
+            postcode__lte='2999'
+        ).order_by('postcode', 'total')
     else:
-        # animals = Animal.objects.all()
-        animals = Animal.objects.filter(postcode__gte ='2000', postcode__lte = '2999')
-        animals.query.group_by = ['postcode']
+        totals = CategoryPostcodeTotal.objects.filter(
+            postcode__gte ='2000',
+            postcode__lte='2999'
+        ).order_by('postcode', 'total')
 
-    for animal in animals:
+    for total in totals:
         items.append([
-           animal.lat,
-           animal.lon,
-           animal.postcode,
-           animal.category_name,
-           '/static_media/img/' + str(animal.category_id) + '.png',
-           animal.counter
+           total.lat,
+           total.lon,
+           total.postcode,
+           total.category_name,
+           '/static_media/img/' + str(total.category_id) + '.png',
+           total.total
         ])
 
     return items
@@ -90,7 +93,7 @@ def index(request, **kwargs):
 
 def getdogs(request, **kwargs):
 
-    items = __get_animals()
+    items = __get_totals()
     json = simplejson.dumps(items)
 
     return HttpResponse(json)
@@ -98,7 +101,7 @@ def getdogs(request, **kwargs):
 
 def getdogs_category(request, category_id, **kwargs):
 
-    items = __get_animals(category_id)
+    items = __get_totals(category_id)
     json = simplejson.dumps(items)
 
     return HttpResponse(json)

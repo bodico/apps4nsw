@@ -21,3 +21,11 @@ class Postcode(models.Model):
     lat = models.CharField(max_length=60, blank=True, null=True)
     lon = models.CharField(max_length=60, blank=True, null=True)
     
+
+class CategoryPostcodeTotal(models.Model):
+    category_id = models.IntegerField(blank=True, null=True)
+    category_name = models.CharField(max_length=120, blank=True, null=True)
+    postcode = models.CharField(max_length=120, blank=True, null=True)
+    total = models.IntegerField(blank=True, null=True)
+    lat = models.CharField(max_length=60, blank=True, null=True)
+    lon = models.CharField(max_length=60, blank=True, null=True)
