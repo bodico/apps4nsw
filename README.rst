@@ -68,11 +68,10 @@ Create site database
 
 Create the db::
 
-  mysql -u root -p
-  CREATE DATABASE apps4nsw
-
-Then::
-
   cd project/
   ./manage.py syncdb
+
+Import some data::
+
+  ./manage.py geocode_postcodes
 
