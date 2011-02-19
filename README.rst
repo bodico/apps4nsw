@@ -1,10 +1,28 @@
-Some project
-============
+Is Bondi Full Of Poodles?
+=========================
+
+Introduction
+------------
+
+This project was done (poorly) as part of the Apps4NSW hack day on
+Saturday 19 Feb 2011. It aggregates data on domestic animals from
+the NSW state government with public information from numerous other
+sources, including wikipedia, and renders it all on a rather fetching
+google map.
+
+The project team included:
+
+* Diana Mounter
+* Chris Oates
+* Dylan Jay
+* Bo Daley
 
 Installation
 ------------
 
-(assumes you have python, virtualenv and pip installed already)::
+We assume you already have working python, virtualenv and pip.
+
+To install a dev instance of IBFOP, follow these steps::
 
   mkdir apps4nsw
   virtualenv apps4nsw
